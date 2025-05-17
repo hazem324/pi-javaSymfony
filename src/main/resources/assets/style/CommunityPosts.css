@@ -1,0 +1,175 @@
+/* General Page Styling */
+.community-posts-page {
+    -fx-background-color: #f5f5f5;
+}
+
+/* Top Bar */
+.top-bar {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 0 0 1 0;
+}
+
+.community-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.user-name {
+    -fx-font-size: 14px;
+    -fx-text-fill: #555555;
+}
+
+/* Content Scroll */
+.content-scroll {
+    -fx-background-color: transparent;
+}
+
+.content-container {
+    -fx-padding: 20px;
+    -fx-spacing: 20px;
+}
+
+/* New Post Container */
+.new-post-container {
+    -fx-background-color: #ffffff;
+    -fx-padding: 15px;
+    -fx-spacing: 10px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1px;
+}
+
+.section-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.post-textarea {
+    -fx-pref-height: 100px;
+    -fx-pref-width: 600px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #cccccc;
+}
+
+.post-actions .image-button,
+.post-actions .submit-button {
+    -fx-padding: 5px 15px;
+    -fx-background-radius: 5px;
+}
+
+.image-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+}
+
+.submit-button {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+}
+
+/* Timeline Container */
+.timeline-container {
+    -fx-spacing: 15px;
+}
+
+.timeline-post {
+    -fx-background-color: #ffffff;
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1px;
+}
+
+.post-header .post-author-image {
+    -fx-background-radius: 50%;
+}
+
+.post-author-name {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.post-date {
+    -fx-font-size: 12px;
+    -fx-text-fill: #777777;
+}
+
+.post-content {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+.post-image {
+    -fx-background-radius: 5px;
+}
+
+.post-actions-bar .action-button {
+    -fx-padding: 5px 15px;
+    -fx-background-radius: 5px;
+    -fx-text-fill: black;
+}
+
+/* Like Button Style */
+.post-actions-bar .action-button:like {
+    -fx-background-color: #E6F9E6;
+}
+.post-actions-bar .action-button:like:hover {
+    -fx-background-color: #CDE8CD; /* Slightly darker on hover */
+}
+
+/* Comment Button Style */
+.post-actions-bar .action-button:comment {
+    -fx-background-color: #D0EFFF;
+}
+.post-actions-bar .action-button:comment:hover {
+    -fx-background-color: #B3D8F0; /* Slightly darker on hover */
+}
+
+.comments-section {
+    -fx-padding: 10px;
+    -fx-spacing: 5px;
+}
+
+.comment {
+    -fx-background-color: #f9f9f9;
+    -fx-padding: 5px;
+    -fx-border-radius: 5px;
+}
+
+.comment-author-image {
+    -fx-background-radius: 50%;
+}
+
+.comment-author-name {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.comment-content {
+    -fx-font-size: 12px;
+    -fx-text-fill: #555555;
+}
+
+.comment-input-container {
+    -fx-spacing: 10px;
+}
+
+.comment-input {
+    -fx-pref-height: 50px;
+    -fx-pref-width: 500px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #cccccc;
+}
+
+.comment-submit-button {
+    -fx-padding: 5px 15px;
+    -fx-background-radius: 5px;
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+}

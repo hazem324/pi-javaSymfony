@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane
+        fx:id="bp"
+        prefHeight="600.0"
+        prefWidth="800.0"
+        stylesheets="@/assets/style/cartView.css"
+        xmlns:fx="http://javafx.com/fxml"
+        fx:controller="controllers.marketplace.CartController">
+
+    <center>
+        <VBox styleClass="cart-vbox" spacing="20">
+            <padding>
+                <Insets top="25" right="25" bottom="25" left="25"/>
+            </padding>
+
+            <!-- Page Title -->
+            <Text text="Votre Panier" styleClass="page-title" />
+
+            <TableView fx:id="cartTable" prefHeight="350" prefWidth="650" styleClass="cart-table">
+                <columns>
+                    <TableColumn text="Produit" fx:id="colProduct" prefWidth="180"/>
+                    <TableColumn text="Prix (TND)" fx:id="colPrice" prefWidth="100"/>
+                    <TableColumn text="Quantité" fx:id="colQuantity" prefWidth="180"/>
+                    <TableColumn text="Total Produit" fx:id="colTotal" prefWidth="100"/>
+                    <TableColumn text="Actions" fx:id="colActions" prefWidth="100"/>
+                </columns>
+            </TableView>
+
+            <!-- Coupon Container -->
+            <HBox fx:id="couponContainer" styleClass="coupon-container" spacing="15">
+                <!-- Loaded dynamically from coupon_box.fxml -->
+            </HBox>
+
+            <!-- Total Container -->
+            <HBox styleClass="total-container" spacing="20" alignment="CENTER_RIGHT">
+                <Label text="Total général :" styleClass="total-label" />
+                <Label fx:id="totalLabel" text="0.00 TND" styleClass="total-amount" />
+            </HBox>
+
+            <!-- Button Container -->
+            <HBox styleClass="button-container" spacing="25" alignment="CENTER">
+                <Button text="Valider ma commande" styleClass="validate-button" onAction="#onValider" />
+                <Button text="Vider le panier" styleClass="clear-button" onAction="#onVider" />
+                <Button text="Continuer vos achats" styleClass="continue-button" onAction="#onContinuer" />
+                <Button text="Suivre ma commande" styleClass="track-button" onAction="#onSuivreCommande" />
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
