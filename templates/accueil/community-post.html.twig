@@ -1,0 +1,395 @@
+{% extends 'accueil/base.html.twig' %}
+
+{% block title %}Publications de la Communauté - {{ community.name }}{% endblock %}
+
+{% block content %}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+<style>
+    body {
+        margin-top: 20px;
+        background: #eee;
+    }
+
+    .timeline {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        position: relative;
+    }
+
+    .timeline:before {
+        content: '';
+        position: absolute;
+        top: 5px;
+        bottom: 5px;
+        width: 5px;
+        background: #2d353c;
+        left: 20%;
+        margin-left: -2.5px;
+    }
+
+    .timeline > li {
+        position: relative;
+        min-height: 50px;
+        padding: 20px 0;
+    }
+
+    .timeline .timeline-time {
+        position: absolute;
+        left: 0;
+        width: 18%;
+        text-align: right;
+        top: 30px;
+    }
+
+    .timeline .timeline-time .date,
+    .timeline .timeline-time .time {
+        display: block;
+        font-weight: 600;
+    }
+
+    .timeline .timeline-time .date {
+        line-height: 16px;
+        font-size: 12px;
+    }
+
+    .timeline .timeline-time .time {
+        line-height: 24px;
+        font-size: 20px;
+        color: #242a30;
+    }
+
+    .timeline .timeline-icon {
+        left: 15%;
+        position: absolute;
+        width: 10%;
+        text-align: center;
+        top: 40px;
+    }
+
+    .timeline .timeline-icon a {
+        text-decoration: none;
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        border-radius: 20px;
+        background: #d9e0e7;
+        line-height: 10px;
+        color: #fff;
+        font-size: 14px;
+        border: 5px solid #2d353c;
+        transition: border-color .2s linear;
+    }
+
+    .timeline .timeline-body {
+        margin-left: 23%;
+        margin-right: 17%;
+        background: #fff;
+        position: relative;
+        padding: 20px 25px;
+        border-radius: 6px;
+    }
+
+    .timeline .timeline-body:before {
+        content: '';
+        display: block;
+        position: absolute;
+        border: 10px solid transparent;
+        border-right-color: #fff;
+        left: -20px;
+        top: 20px;
+    }
+
+    .timeline-header {
+        padding-bottom: 10px;
+        border-bottom: 1px solid #e2e7eb;
+        line-height: 30px;
+    }
+
+    .timeline-header .userimage {
+        float: left;
+        width: 34px;
+        height: 34px;
+        border-radius: 40px;
+        overflow: hidden;
+        margin: -2px 10px -2px 0;
+    }
+
+    .timeline-header .username {
+        font-size: 16px;
+        font-weight: 600;
+        color: #2d353c;
+    }
+
+    .timeline-content {
+        letter-spacing: .25px;
+        line-height: 18px;
+        font-size: 13px;
+    }
+
+    .timeline-footer {
+        background: #fff;
+        border-top: 1px solid #e2e7ec;
+        padding-top: 15px;
+    }
+
+    .timeline-footer a {
+        color: #575d63;
+    }
+
+    .timeline-footer a:hover {
+        color: #2d353c;
+    }
+
+    .timeline-comment-box {
+        background: #f2f3f4;
+        padding: 20px 25px;
+    }
+
+    .timeline-comment-box .user {
+        float: left;
+        width: 34px;
+        height: 34px;
+        overflow: hidden;
+        border-radius: 30px;
+    }
+
+    .timeline-comment-box .user img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .timeline-comment-box .user + .input {
+        margin-left: 44px;
+    }
+    .img-fluid{
+        width: 100px;
+        height: 100px;
+    }
+
+    .form-error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.timeline-content p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.timeline-comments {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 6px;
+    border: 1px solid #e2e7eb;
+}
+
+.timeline-comments h6 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d353c;
+    margin-bottom: 15px;
+}
+
+.timeline-comment {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 6px;
+    border: 1px solid #e2e7eb;
+}
+
+.timeline-comment .timeline-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.timeline-comment .userimage {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.timeline-comment .userimage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.timeline-comment .username {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2d353c;
+}
+
+.timeline-comment .timeline-content {
+    font-size: 13px;
+    color: #575d63;
+    line-height: 1.5;
+}
+
+.timeline-comment-box {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f2f3f4;
+    border-radius: 6px;
+}
+
+.timeline-comment-box .user {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.timeline-comment-box .user img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.timeline-comment-box .input {
+    flex: 1;
+}
+
+.timeline-comment-box .input textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #e2e7eb;
+    resize: none;
+    font-size: 13px;
+}
+
+.timeline-comment-box .input button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    background: #2d353c;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.timeline-comment-box .input button:hover {
+    background: #242a30;
+}
+
+</style>
+
+<div class="container">
+    <h2 class="text-center">Publications de la Communauté - {{ community.name }}</h2>
+    
+    <div class="mb-4 p-4 bg-white rounded shadow-sm">
+        <h4>Ajouter une nouvelle publication</h4>
+        <form method="post" action="{{ path('community_posts_manage', {'id': community.id}) }}" enctype="multipart/form-data" novalidate>
+            {{ form_start(postForm, {'attr': {'novalidate': 'novalidate'}}) }}
+            
+            <div class="mb-3">
+                {{ form_label(postForm.content, 'Contenu', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(postForm.content, {'attr': {'class': 'form-control', 'rows': 3}}) }}
+                {% if form_errors(postForm.content) %}
+                    <div class="form-error-message">{{ form_errors(postForm.content) }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(postForm.postImg, 'Image', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(postForm.postImg, {'attr': {'class': 'form-control-file'}}) }}
+                {% if form_errors(postForm.postImg) %}
+                    <div class="form-error-message">{{ form_errors(postForm.postImg) }}</div>
+                {% endif %}
+            </div>
+
+            <input type="hidden" name="_token" value="{{ csrf_token('post_add') }}">
+
+            <button type="submit" class="btn btn-primary">Publier</button>
+
+            {{ form_end(postForm) }}
+        </form>
+    </div>
+
+    <ul class="timeline">
+        {% for post in posts %}
+            <li>
+                <div class="timeline-time">
+                    <span class="date">{{ post.creationDate|date('d/m/Y') }}</span>
+                    <span class="time">{{ post.creationDate|date('H:i') }}</span>
+                </div>
+
+                <div class="timeline-icon">
+                    <a href="javascript:;">&nbsp;</a>
+                </div>
+
+                <div class="timeline-body">
+                    <div class="timeline-header">
+                        <span class="userimage">
+                            <img src="{{ post.user.profileIMG ? asset(post.user.profileIMG) : 'https://bootdey.com/img/Content/avatar/avatar1.png' }}" 
+                                 alt="{{ post.user.firstName }}">
+                        </span>
+                        <span class="username">
+                            {{ post.user.firstName }}
+                        </span>
+                        <span class="pull-right text-muted">{{ post.likes }} Likes</span>
+                    </div>
+                    <div class="timeline-content">
+                        <p>{{ post.content|nl2br }}</p>
+                        {% if post.postImg %}
+                            <img src="{{ asset(post.postImg) }}" alt="Post Image" class="img-fluid">
+                        {% endif %}
+                    </div>
+                <div class="timeline-comments">
+    <h6>Commentaires:</h6>
+    {% if post.postComments is not empty %}
+        {% for comment in post.postComments %}
+            <div class="timeline-comment">
+                <div class="timeline-header">
+                    <span class="userimage">
+                        <img src="{{ comment.user.profileIMG ? asset(comment.user.profileIMG) : 'https://bootdey.com/img/Content/avatar/avatar2.png' }}" 
+                             alt="{{ comment.user.firstName }}">
+                    </span>
+                    <span class="username">
+                        {{ comment.user.firstName }}
+                    </span>
+                    <span class="pull-right text-muted">{{ comment.creationDate|date('d/m/Y') }}</span>
+                </div>
+                <div class="timeline-content">
+                    <p>{{ comment.pcommentContent|nl2br }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-center">Aucun commentaire pour ce post.</p>
+    {% endif %}
+
+    <div class="timeline-comment-box">
+    <form method="post" action="{{ path('community_posts_manage', {id: community.id}) }}" novalidate>
+        {{ form_start(commentForms[post.id], {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="input">
+            {{ form_widget(commentForms[post.id].pcommentContent, {'attr': {'class': 'form-control', 'placeholder': 'Ajouter un commentaire...', 'rows': 2}}) }}
+            <button type="submit" name="comment_submit_{{ post.id }}" class="btn btn-primary mt-2">Commenter</button>
+        </div>
+        {{ form_end(commentForms[post.id]) }}
+    </form>
+</div>
+</div>
+            </li>
+        {% else %}
+            <li>
+                <p class="text-center">Aucune publication pour cette communauté.</p>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

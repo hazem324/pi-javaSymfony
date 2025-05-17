@@ -1,0 +1,68 @@
+<div class="container-fluid blog pb-5">
+    <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Our Communities</h4>
+            <h1 class="display-5 mb-4">Explore & Join</h1>
+            <p class="mb-0">
+                Discover different communities, connect with like-minded individuals, and participate in discussions.
+            </p>
+        </div>
+
+        <div class="owl-carousel blog-carousel wow fadeInUp" data-wow-delay="0.2s">
+            {% for community in community %}
+                <div class="blog-item p-4">
+                    <div class="blog-img mb-4">
+                        <img src="{{ asset(community.banner) }}" class="img-fluid w-100 rounded" alt="{{ community.name }}">
+                        <div class="blog-title">
+                            <a href="#" class="btn">{{ community.category.value|default('General') }}</a>
+                        </div>
+                    </div>
+                    <a href="#" class="h4 d-inline-block mb-3">{{ community.name }}</a>
+                    <p class="mb-4">{{ community.description }}</p> <!-- Description will be truncated to 2 lines -->
+                    <div class="d-flex align-items-center">
+                        <div class="ms-3">
+                            <h5>Created On</h5>
+                            <p class="mb-0">{{ community.creationDate|date('F j, Y') }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p class="text-center">No communities found.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .blog-carousel {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .blog-item {
+        flex: 1 1 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .blog-item img {
+        width: 100%;
+        height: auto;
+    }
+
+    .blog-item p {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.5;
+        max-height: 3em;
+        margin-bottom: 0;
+    }
+</style>

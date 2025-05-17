@@ -1,0 +1,63 @@
+
+{% block title %}Liste des Commandes{% endblock %}
+
+{% block body %}
+<h1 class="my-4">Liste des Commandes</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Date de Création</th>
+            <th>Status</th>
+            <th>Produits</th>
+            <th>Quantité</th>
+            <th>Total Prix (TND)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.id }}</td>
+                <td>{{ commande.creationDate|date('d/m/Y H:i') }}</td>
+                <td>
+                    {{ commande.status }}
+                    <form method="POST" action="{{ path('admin_commande_change_status', {'id': commande.id}) }}" class="mt-2">
+                        <select name="status" class="form-select">
+                            <option value="En attente" {% if commande.status == 'En attente' %}selected{% endif %}>En attente</option>
+                            <option value="Validée" {% if commande.status == 'Validée' %}selected{% endif %}>Validée</option>
+                            <option value="En préparation" {% if commande.status == 'En préparation' %}selected{% endif %}>En préparation</option>
+                            <option value="Livrée" {% if commande.status == 'Livrée' %}selected{% endif %}>Livrée</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary btn-sm mt-2">Modifier</button>
+                    </form>
+                </td>
+                <td>
+                    <ul>
+                        {% for product in commande.products %}
+                            <li>{{ product.getNom() }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>
+    <ul>
+        {% for product in commande.products %}
+            <li>{{ product.getNom() }} (Quantité : 1)</li> {# Quantité est 1 par produit car elle n'est pas spécifiée #}
+        {% endfor %}
+    </ul>
+</td>
+
+                <td>{{ commande.getTotalPrice() }} TND</td>
+                <td>
+                    <a href="{{ path('admin_commande_delete', {'id': commande.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette commande ?');">Supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7" class="text-center">Aucune commande trouvée!</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
